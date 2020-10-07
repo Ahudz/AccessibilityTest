@@ -6,36 +6,6 @@
 #gxInputOutput { width:500px; }
 #gxInputOutput table{ width: 100%; table-layout: fixed;}
 #display { border: 1px solid black; background-color: rgba(255, 255, 255, 1.00)}
-#gxWrapper{margin-left: auto;
-  margin-right: auto; width: 500px}
-#stopwatch {
-  background: #eee;
-  border: 1px solid #999;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 250px;
-  margin-left: auto;
-  margin-right: auto;
-}
-#sw-time {
-  font-size: 48px;
-  font-weight: bold;
-  text-align: center;
-}
-#sw-rst, #sw-go {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  box-sizing: padding-box;
-  padding: 10px;
-  display: inline-block;
-  background: #aa2f2f;
-  border: 0;
-  color: #fff;
-}
-
-
-
 .gxCredit { font-size: x-small; padding-top: 10px; }
 .gxInputLowerLimit {width: 33%; text-align: left; font-size: small; }
 .gxInputCurrentValue {width: 34%; text-align: center; font-size: small; }
@@ -45,7 +15,6 @@
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	font-size: small;
 }
-
 </style>
 <!--link href="your_style_sheet.css" rel="stylesheet" type="text/css"-->
 
@@ -55,7 +24,6 @@ var FIXED_ASPECT_RATIO = 1;
 var FIXED_BOUNDS = 0.0;
 var BACKGROUND_COLOR = 'rgba(255, 255, 255, 1.00)';
 // Internal inputs
-//big star
 var d_10 = 45.2003244571216;
 var d_11 = 71.3350686253616;
 var d_12 = 53.0275971783387;
@@ -66,12 +34,8 @@ var d_16 = 29.6082898426331;
 var d_17 = 4.86647761579005;
 var d_18 = 29.0356552988493;
 var d_9 = 40.9219211012955;
-
-//star positions
 var u_0 = 3.42825338175363;
 var v_0 = 6.99828789363032;
-
-//xy for points
 var x_0 = 32.3844453320289;
 var x_1 = 34.4749435742678;
 var x_2 = 41.429810296676;
@@ -92,8 +56,6 @@ var y_6 = -16.1154277876529;
 var y_7 = -10.0929980242113;
 var y_8 = -6.36166356513168;
 var y_9 = -6.33478358154821;
-
-
 var theta_10 = 6.19622916873292;
 var theta_11 = 6.22689449438458;
 var theta_12 = 5.94588225872269;
@@ -210,90 +172,6 @@ new Circle(x_0, y_0, 6.000000)
  
  
 var nInteractiveTraces = 0;
-
-<!-- STOP WATCH CODE!!!!!----->
-
-var sw = {
-  /* [INIT] */
-  etime : null, // holds HTML time display
-  erst : null, // holds HTML reset button
- // ego : null, // holds HTML start/stop button
-  timer : null, // timer object
-  running: false, //lets us know if the timer is running
-  now : 0, // current timer
-  init : function () {
-    // Get HTML elements
-    sw.etime = document.getElementById("sw-time");
-    sw.erst = document.getElementById("sw-rst");
-    sw.ego = document.getElementById("sw-go");
-
-    // Attach listeners
-    sw.erst.addEventListener("click", sw.reset);
-    sw.erst.disabled = false;
-   // sw.ego.addEventListener("click", sw.start);
-    //sw.ego.disabled = false;
-  },
-
-  /* [ACTIONS] */
-  tick : function () {
-  // tick() : update display if stopwatch running
-
-    // Calculate hours, mins, seconds
-    sw.now++;
-    var remain = sw.now;
-    var hours = Math.floor(remain / 600);
-    remain -= hours * 600;
-    var mins = Math.floor(remain / 10);
-    remain -= mins * 10;
-    var secs = remain;
-
-    // Update the display timer
-    if (mins<10) { mins = "0" + mins; }
-    sw.etime.innerHTML = hours + ":" + mins + "." + secs;
-  },
-
-  start : function () {
-  // start() : start the stopwatch
-	if(sw.running != true){
-		sw.running = true;
-		sw.timer = setInterval(sw.tick, 100);
-		//sw.ego.value = "Stop";
-		//sw.ego.removeEventListener("click", sw.start);
-		//sw.ego.addEventListener("click", sw.stop);
-	}
-  },
-
-  stop  : function () {
-  // stop() : stop the stopwatch
-
-	sw.running = false;
-    clearInterval(sw.timer);
-    sw.timer = null;
-   // sw.ego.value = "Start";
-  //  sw.ego.removeEventListener("click", sw.stop);
-   // sw.ego.addEventListener("click", sw.start);
-  },
-
-  reset : function () {
-  // reset() : reset the stopwatch
-
-    // Stop if running
-    if (sw.timer != null) { sw.stop(); }
-
-    // Reset time
-    sw.now = -1;
-    sw.tick();
-	javascript:history.go(0)
-  }
-};
-
-
-
-
-
-
-
-
 function updateInputs()
 {
 }
@@ -368,35 +246,24 @@ function recalcGeometry(
     JGOB18Y=y_5;
     JGOB21X=x_6;
     JGOB21Y=y_6;
-	
-	
     JGOB25X=(u_0+(d_9*Math.cos(theta_9)));
     JGOB25Y=(v_0+(d_9*Math.sin(theta_9)));
-	
     JGOB26X=(u_0+(d_18*Math.cos(theta_18)));
     JGOB26Y=(v_0+(d_18*Math.sin(theta_18)));
-	
     JGOB27X=(u_0+(d_17*Math.cos(theta_17)));
     JGOB27Y=(v_0+(d_17*Math.sin(theta_17)));
-	
     JGOB28X=(u_0+(d_16*Math.cos(theta_16)));
     JGOB28Y=(v_0+(d_16*Math.sin(theta_16)));
-	
     JGOB29X=(u_0+(d_15*Math.cos(theta_15)));
     JGOB29Y=(v_0+(d_15*Math.sin(theta_15)));
-	
     JGOB30X=(u_0+(d_14*Math.cos(theta_14)));
     JGOB30Y=(v_0+(d_14*Math.sin(theta_14)));
-	
     JGOB31X=(u_0+(d_13*Math.cos(theta_13)));
     JGOB31Y=(v_0+(d_13*Math.sin(theta_13)));
-	
     JGOB32X=(u_0+(d_12*Math.cos(theta_12)));
     JGOB32Y=(v_0+(d_12*Math.sin(theta_12)));
-	
     JGOB33X=(u_0+(d_11*Math.cos(theta_11)));
     JGOB33Y=(v_0+(d_11*Math.sin(theta_11)));
-	
     JGOB34X=(u_0+(d_10*Math.cos(theta_10)));
     JGOB34Y=(v_0+(d_10*Math.sin(theta_10)));
 }
@@ -3128,9 +2995,7 @@ function mouseCoord(ev, mousePoint)
 
 function onMouseDownCanvas(ev)
 {
-	sw.start();
 	mouseCoord(ev, commonGlobal.mouseScrn);
-	
 	
 	var worldCoord = transformCoord(commonGlobal.screen2World, commonGlobal.mouseScrn.x, commonGlobal.mouseScrn.y);
 	commonGlobal.mouseWrld.x = worldCoord.x;
@@ -3150,7 +3015,6 @@ function onMouseDownCanvas(ev)
 		}
 	}
 	
-	
 }
 
 function onMouseMoveCanvas(ev)
@@ -3165,61 +3029,11 @@ function onMouseMoveCanvas(ev)
 	{
 		dragHandlesList[commonGlobal.currentDraggable].x = commonGlobal.mouseWrld.x;
 		dragHandlesList[commonGlobal.currentDraggable].y = commonGlobal.mouseWrld.y;
+		
 		doMouseMoveUpdate(commonGlobal.world, commonGlobal.screenBox, commonGlobal.canvas, commonGlobal.context, commonGlobal.world2Screen, commonGlobal.screen2World);
 	}
 	
    
-}
-function comparePoints(){
-	console.log("comparing points");
-	var sucessCount = 0;
-
-	var BigStarList = new Array(
-	new Circle(JGOB25X, JGOB25Y, 6.000000)
-	, new Circle(JGOB26X, JGOB26Y, 6.000000)
-	, new Circle(JGOB27X, JGOB27Y, 6.000000)
-	, new Circle(JGOB28X, JGOB28Y, 6.000000)
-	, new Circle(JGOB29X, JGOB29Y, 6.000000)
-	, new Circle(JGOB30X, JGOB30Y, 6.000000)
-	, new Circle(JGOB31X, JGOB31Y, 6.000000)
-	, new Circle(JGOB32X, JGOB32Y, 6.000000)
-	, new Circle(JGOB33X, JGOB33Y, 6.000000)
-	, new Circle(JGOB34X, JGOB34Y, 6.000000)
-	);
-	
-	for (var i = 0; i < dragHandlesList.length; ++i)
-	{
-		//console.log("DragHandle: " + i + "####################");
-		var r = 1.5;
-		for( var j = 0; j < BigStarList.length; ++j)
-		{
-			//console.log("BigStar: " + j + "---------------------");
-			//console.log("BX: " + BigStarList[j].x );
-			//console.log("BY: " + BigStarList[j].y);
-			//console.log("LX: " + dragHandlesList[i].x);
-			//console.log("Ly: " + dragHandlesList[i].x);
-			
-			var dx = BigStarList[j].x - dragHandlesList[i].x
-			var dy = BigStarList[j].y-dragHandlesList[i].y
-			var distance2 = Math.sqrt((dy*dy) + (dx*dx));
-//			console.log("distance2: " + distance2);
-		
-			if (distance2 <= r)
-			{		
-//				console.log("Point: ["+i+"] ["+i+"] passed with a distance of: " + distance2);
-				sucessCount++;
-				break;
-			}
-		}
-
-	}
-	console.log("Points Passed:" + sucessCount);
-	
-	if(sucessCount >= dragHandlesList.length)
-	{
-		console.log("stoping");
-		sw.stop();
-	}
 }
 
 function onMouseUpCanvas(ev)
@@ -3230,13 +3044,9 @@ function onMouseUpCanvas(ev)
 	commonGlobal.mouseWrld.x = worldCoord.x;
 	commonGlobal.mouseWrld.y = worldCoord.y;
 	
-	console.log("Drag point x: " + dragHandlesList[commonGlobal.currentDraggable].x );		
-	console.log("Drag point y : " + dragHandlesList[commonGlobal.currentDraggable].y );
-	
 	commonGlobal.dragging = false;
 	//doFullUpdate(world, screenBox, canvas, context, world2Screen, screen2World);
 	doMouseMoveUpdate(commonGlobal.world, commonGlobal.screenBox, commonGlobal.canvas, commonGlobal.context, commonGlobal.world2Screen, commonGlobal.screen2World);
-	comparePoints();
 }
 
 function onKeyPressCanvas(evt)
@@ -3678,10 +3488,6 @@ function drawInteractiveTraces(TranMat, ctx)
 	}
 }
 
-
-
-window.addEventListener("load", sw.init);
-
 </script>
 <!-- #EndEditable -->
 
@@ -3696,12 +3502,6 @@ window.addEventListener("load", sw.init);
 </head>
 <body onload="load()" onresize="onResize()">
 <div id="gxWrapper">
-<div id="stopwatch">
-      <!-- [DISPLAY TIMER] -->
-      <div id="sw-time">0:00.0</div>
-      <!-- [RESET BUTTON] -->
-      <input type="button" value="Reset" id="sw-rst" disabled/>
-</div>
 <div id="gxHeader">
 <h1></h1>
 <p></p>
@@ -3711,8 +3511,11 @@ window.addEventListener("load", sw.init);
 This document requires an HTML5-compliant browser.
 </canvas>
 <div id="gxInputOutput" style="width: 500px;">
+<table>
+</table>				<span class="auto-style1">
+	<a href="javascript:history.go(0)">Click to start over</a></span>
+<br>
 </div>
-
 <div id="gxFooter">
 <div></div>
 </div>
